@@ -8,13 +8,13 @@ Since you don't trust me, you may feel more secure if you build your
 own with the help of the rebuild-image script.  Of course you totally
 trust Ilya, the nodejs team, and who ever build the docker node image.
 
-The script launch-container is used to create a container based
+The script [[./launch-container][launch-container]] is used to create a container based
 on the image.  Reading that script you will notice that it gives
 your container it's own personality by mounting into the container
-the directory proxy-stuff.  There in we find:
+the directory [[./proxy-stuff/][proxy-stuff]].  There in we find:
 + The key and cert for your site.  Since your users will connect
   using https.
-+ The script that starts the proxy.  That sets a user/password
++ The [[./proxy-stuff/start-container][script]] that starts the proxy.  That sets a user/password
   that all your users will use to gain access to the proxy.
 
 Be careful - don't check your real key/cert into a
