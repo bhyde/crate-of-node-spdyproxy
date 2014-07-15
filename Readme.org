@@ -1,12 +1,12 @@
 The code in this repository builds a docker image that contains
-the [[https://github.com/igrigorik/node-spdyproxy][spdy proxy found who's sources are here]], along with much
-more doc about what's going on here.
+the [[https://github.com/igrigorik/node-spdyproxy][Ilya Grigorik's spdy proxy]].
 
 This image is available as bhyde/crate-of-node-spdyproxy on the
 [[https://registry.hub.docker.com/u/bhyde/crate-of-node-spdyproxy/][docker hub]].
 
-But, you will feel more secure if you build your own with the
-help of the rebuild-image script.
+Since you don't trust me, you may feel more secure if you build your
+own with the help of the rebuild-image script.  Of course you totally
+trust Ilya, the nodejs team, and who ever build the docker node image.
 
 The script launch-container is used to create a container based
 on the image.  Reading that script you will notice that it gives
