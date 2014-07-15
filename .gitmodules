@@ -1,0 +1,3 @@
+[submodule "node-spdyproxy"]
+	path = node-spdyproxy
+	url = https://github.com/igrigorik/node-spdyproxy.git

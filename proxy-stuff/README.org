@@ -1,0 +1,17 @@
+The files in this directory configure your proxy.
+
+The directory is mounted into the container and
+give it your customized personality.
+
+So you must
+1. place your site's key and cert into this directory.
+2. Adjust the start-container script appropriately.
+
+The default user/password that will be used
+by your _all_ your users to authenticate with the
+proxy.
+
+The example_org.{key,crt} included are useless.
+
+Be careful - don't check your real key/cert into a
+public repository by mistake.

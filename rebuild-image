@@ -1,0 +1,28 @@
+#!/bin/bash
+cd `dirname $0`
+set -o nounset -o errexit 
+# set -o verbose
+LOG(){  echo "LOG: $*" ; }
+ERROR(){  echo "ERROR: $*" ;  exit 1; }
+
+trap 'LOG exited with an error' ERR
+
+
+TAG=bhyde/crate-of-node-spdyproxy
+LOG "Rebuilding $TAG image"
+if docker inspect "$TAG" > /dev/null 2>&1 ; then
+    LOG "Discarding old $TAG image"
+    docker rmi "$TAG"
+fi
+
+LOG "Building..."
+docker build "--tag=$TAG" - <<EOF
+FROM node
+MAINTAINER Ben Hyde <bhyde@pobox.com>
+RUN npm install -g spdyproxy
+EXPOSE 443
+CMD /proxy-stuff/start-container
+EOF
+
+docker images "$TAG"
+LOG "Build of $TAG succeeded."

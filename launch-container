@@ -1,0 +1,33 @@
+#!/bin/bash
+cd $(dirname $0)
+
+NAME=spdyproxy
+PERSONALITY="$(pwd)/proxy-stuff"
+
+function LOG() { echo "LOG: $*" 1>&2 ; }
+function ERROR() { echo "LOG: $*" 1>&2 ;  exit 1 ; }
+
+# Destroy any existing container of the same name.
+S="$(docker inspect -f '{{.State.Pid}}' $NAME 2> /dev/null}})"
+case "x$S" in
+x) ;;
+x0) LOG removed old container ; docker rm "$NAME" > /dev/null ;;
+*) LOG stop and remove old container ;  docker stop --time=3 "$NAME" > /dev/null ; docker rm "$NAME" > /dev/null ;;
+esac
+
+# Run a fresh container.
+docker run \
+    --name="$NAME" \
+    --detach \
+    "--volume=${PERSONALITY}:/proxy-stuff:ro" \
+    --publish=4430:443 \
+    bhyde/crate-of-node-spdyproxy
+
+# Check that didn't just exit.
+sleep 3
+if [[ false = $(docker inspect -f '{{.State.Running}}' spdyproxy) ]] ; then
+    LOG showing log tail due to startup failure"
+    docker logs $NAME | tail
+    ERROR: $NAME is not running."
+    exit 1
+fi

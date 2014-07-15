@@ -1,0 +1,21 @@
+The code in this repository builds a docker image that contains
+the [[https://github.com/igrigorik/node-spdyproxy][spdy proxy found who's sources are here]], along with much
+more doc about what's going on here.
+
+This image is available as bhyde/crate-of-node-spdyproxy on the
+[[https://registry.hub.docker.com/u/bhyde/crate-of-node-spdyproxy/][docker hub]].
+
+But, you will feel more secure if you build your own with the
+help of the rebuild-image script.
+
+The script launch-container is used to create a container based
+on the image.  Reading that script you will notice that it gives
+your container it's own personality by mounting into the container
+the directory proxy-stuff.  There in we find:
++ The key and cert for your site.  Since your users will connect
+  using https.
++ The script that starts the proxy.  That sets a user/password
+  that all your users will use to gain access to the proxy.
+
+Be careful - don't check your real key/cert into a
+public repository by mistake.

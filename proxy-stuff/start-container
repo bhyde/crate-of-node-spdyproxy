@@ -1,0 +1,5 @@
+#!/bin/bash
+exec spdyproxy -k /proxy-stuff/example_org.key -c /proxy-stuff/example_org.crt -U thanks -P much -p 443
+
+
+
